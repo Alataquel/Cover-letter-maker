@@ -17,13 +17,6 @@ interface FormData {
   jobTitle: string;
   companyName: string;
   jobDescription: string;
-  personalInfo: {
-    name: string;
-    email: string;
-    phone: string;
-    experience: string;
-    skills: string;
-  };
   apiKey: string;
 }
 
@@ -33,13 +26,6 @@ export const CoverLetterForm: React.FC<CoverLetterFormProps> = ({ onClose, onSav
     jobTitle: '',
     companyName: '',
     jobDescription: '',
-    personalInfo: {
-      name: '',
-      email: '',
-      phone: '',
-      experience: '',
-      skills: '',
-    },
     apiKey: '',
   });
   const [generatedLetter, setGeneratedLetter] = useState<string>('');
@@ -52,15 +38,6 @@ export const CoverLetterForm: React.FC<CoverLetterFormProps> = ({ onClose, onSav
     }));
   };
 
-  const handlePersonalInfoChange = (field: keyof FormData['personalInfo'], value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      personalInfo: {
-        ...prev.personalInfo,
-        [field]: value
-      }
-    }));
-  };
 
   const generateCoverLetter = async () => {
     if (!formData.apiKey.trim()) {
@@ -88,13 +65,6 @@ export const CoverLetterForm: React.FC<CoverLetterFormProps> = ({ onClose, onSav
 Job Title: ${formData.jobTitle}
 Company: ${formData.companyName}
 Job Description: ${formData.jobDescription}
-
-Personal Information:
-Name: ${formData.personalInfo.name}
-Email: ${formData.personalInfo.email}
-Phone: ${formData.personalInfo.phone}
-Experience: ${formData.personalInfo.experience}
-Skills: ${formData.personalInfo.skills}
 
 Please write a compelling, professional cover letter that highlights relevant experience and skills for this position. Keep it concise and engaging.`;
 
@@ -230,52 +200,6 @@ Please write a compelling, professional cover letter that highlights relevant ex
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <div>
-                  <Badge variant="secondary" className="mb-3">Personal Information</Badge>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Full Name</Label>
-                    <Input
-                      id="name"
-                      placeholder="Your full name"
-                      value={formData.personalInfo.name}
-                      onChange={(e) => handlePersonalInfoChange('name', e.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="your.email@example.com"
-                      value={formData.personalInfo.email}
-                      onChange={(e) => handlePersonalInfoChange('email', e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="experience">Relevant Experience</Label>
-                  <Textarea
-                    id="experience"
-                    placeholder="Briefly describe your relevant work experience..."
-                    value={formData.personalInfo.experience}
-                    onChange={(e) => handlePersonalInfoChange('experience', e.target.value)}
-                    rows={3}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="skills">Key Skills</Label>
-                  <Textarea
-                    id="skills"
-                    placeholder="List your key skills relevant to this position..."
-                    value={formData.personalInfo.skills}
-                    onChange={(e) => handlePersonalInfoChange('skills', e.target.value)}
-                    rows={3}
-                  />
-                </div>
-              </div>
 
               <div className="space-y-4">
                 <div>

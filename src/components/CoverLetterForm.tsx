@@ -117,14 +117,9 @@ Sincerely,
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
       <Card className="bg-gradient-card shadow-card-hover max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col">
         <div className="p-6 border-b border-border flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary">
-              <Sparkles className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <div>
-              <h2 className="text-xl font-semibold text-card-foreground">AI Cover Letter</h2>
-              <p className="text-sm text-muted-foreground">AI-powered professional cover letter generation</p>
-            </div>
+          <div>
+            <h2 className="text-xl font-semibold text-card-foreground">AI Cover Letter</h2>
+            <p className="text-sm text-muted-foreground">AI-powered professional cover letter generation</p>
           </div>
           <Button variant="ghost" size="icon" onClick={onClose}>
             <X className="h-5 w-5" />

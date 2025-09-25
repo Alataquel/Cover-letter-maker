@@ -76,7 +76,7 @@ export const Dashboard: React.FC = () => {
                 <FileText className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-card-foreground">Cover Letter Maker</h1>
+                <h1 className="text-2xl font-bold text-card-foreground">AI Cover Letter</h1>
                 <p className="text-muted-foreground">AI-powered professional cover letters</p>
               </div>
             </div>

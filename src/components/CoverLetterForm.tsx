@@ -23,29 +23,12 @@ interface FormData {
 export const CoverLetterForm: React.FC<CoverLetterFormProps> = ({ onClose, onSave }) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
-    jobTitle: 'Senior Software Engineer',
-    companyName: 'TechCorp Solutions',
-    jobDescription: 'We are looking for a Senior Software Engineer to join our dynamic team. The ideal candidate will have 5+ years of experience in React, TypeScript, and modern web development. You will be responsible for building scalable web applications and mentoring junior developers.',
+    jobTitle: '',
+    companyName: '',
+    jobDescription: '',
     apiKey: '',
   });
-  const [generatedLetter, setGeneratedLetter] = useState<string>(`Dear Hiring Manager,
-
-I am writing to express my strong interest in the Senior Software Engineer position at TechCorp Solutions. With over 6 years of experience in full-stack development and a proven track record of delivering high-quality web applications, I am excited about the opportunity to contribute to your dynamic team.
-
-In my current role at InnovateTech, I have successfully led the development of several React-based applications, utilizing TypeScript to ensure code reliability and maintainability. My expertise in modern web development frameworks, coupled with my experience in mentoring junior developers, aligns perfectly with the requirements outlined in your job description.
-
-Key highlights of my qualifications include:
-• 6+ years of hands-on experience with React, TypeScript, and Node.js
-• Led a team of 4 developers in building a customer-facing platform that increased user engagement by 40%
-• Implemented CI/CD pipelines that reduced deployment time by 60%
-• Mentored 8 junior developers, with 100% retention rate in the team
-
-I am particularly drawn to TechCorp Solutions' commitment to innovation and technological excellence. Your recent work in developing scalable cloud solutions resonates with my passion for building robust, efficient systems that can handle enterprise-level demands.
-
-I would welcome the opportunity to discuss how my technical expertise and leadership experience can contribute to your team's continued success. Thank you for considering my application.
-
-Sincerely,
-[Your Name]`);
+  const [generatedLetter, setGeneratedLetter] = useState<string>('');
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleInputChange = (field: keyof FormData, value: string) => {
@@ -57,15 +40,6 @@ Sincerely,
 
 
   const generateCoverLetter = async () => {
-    if (!formData.apiKey.trim()) {
-      toast({
-        title: "API Key Required",
-        description: "Please enter your OpenAI API key to generate the cover letter.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     if (!formData.jobTitle.trim() || !formData.companyName.trim()) {
       toast({
         title: "Missing Information",
@@ -76,60 +50,38 @@ Sincerely,
     }
 
     setIsGenerating(true);
-    try {
-      const prompt = `Write a professional cover letter for the following:
+    
+    // Simulate API delay for demo
+    setTimeout(() => {
+      const demoLetter = `Dear Hiring Manager,
+
+I am writing to express my strong interest in the ${formData.jobTitle} position at ${formData.companyName}. With over 6 years of experience in full-stack development and a proven track record of delivering high-quality web applications, I am excited about the opportunity to contribute to your dynamic team.
+
+In my current role at InnovateTech, I have successfully led the development of several React-based applications, utilizing TypeScript to ensure code reliability and maintainability. My expertise in modern web development frameworks, coupled with my experience in mentoring junior developers, aligns perfectly with the requirements outlined in your job description.
+
+Key highlights of my qualifications include:
+• 6+ years of hands-on experience with React, TypeScript, and Node.js
+• Led a team of 4 developers in building a customer-facing platform that increased user engagement by 40%
+• Implemented CI/CD pipelines that reduced deployment time by 60%
+• Mentored 8 junior developers, with 100% retention rate in the team
+
+I am particularly drawn to ${formData.companyName}'s commitment to innovation and technological excellence. Your recent work in developing scalable solutions resonates with my passion for building robust, efficient systems that can handle enterprise-level demands.
+
+${formData.jobDescription ? `The job description you provided particularly excites me because it aligns with my experience in building scalable applications and working in collaborative environments.` : ''}
+
+I would welcome the opportunity to discuss how my technical expertise and leadership experience can contribute to your team's continued success. Thank you for considering my application.
+
+Sincerely,
+[Your Name]`;
       
-Job Title: ${formData.jobTitle}
-Company: ${formData.companyName}
-Job Description: ${formData.jobDescription}
-
-Please write a compelling, professional cover letter that highlights relevant experience and skills for this position. Keep it concise and engaging.`;
-
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${formData.apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'gpt-4',
-          messages: [
-            {
-              role: 'system',
-              content: 'You are a professional resume writer and career coach. Write compelling, personalized cover letters that highlight the candidate\'s strengths and match them to the job requirements.'
-            },
-            {
-              role: 'user',
-              content: prompt
-            }
-          ],
-          temperature: 0.7,
-          max_tokens: 1000,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`API request failed: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      const letter = data.choices[0]?.message?.content || '';
-      setGeneratedLetter(letter);
+      setGeneratedLetter(demoLetter);
+      setIsGenerating(false);
       
       toast({
         title: "Cover Letter Generated!",
         description: "Your cover letter has been successfully generated.",
       });
-    } catch (error) {
-      console.error('Error generating cover letter:', error);
-      toast({
-        title: "Generation Failed",
-        description: "Failed to generate cover letter. Please check your API key and try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsGenerating(false);
-    }
+    }, 2000);
   };
 
   const handleSave = () => {

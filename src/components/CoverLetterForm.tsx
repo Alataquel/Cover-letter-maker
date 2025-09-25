@@ -170,24 +170,6 @@ Sincerely,
               </div>
 
 
-              <div className="space-y-4">
-                <div>
-                  <Badge variant="secondary" className="mb-3">API Configuration</Badge>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="apiKey">OpenAI API Key *</Label>
-                  <Input
-                    id="apiKey"
-                    type="password"
-                    placeholder="sk-..."
-                    value={formData.apiKey}
-                    onChange={(e) => handleInputChange('apiKey', e.target.value)}
-                  />
-                  <p className="text-xs text-muted-foreground">
-                    Your API key is stored locally and never sent to our servers.
-                  </p>
-                </div>
-              </div>
             </div>
 
             {/* Preview Section */}

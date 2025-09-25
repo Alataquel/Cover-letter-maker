@@ -184,7 +184,6 @@ Sincerely,
                     </>
                   ) : (
                     <>
-                      <Sparkles className="h-4 w-4" />
                       Generate
                     </>
                   )}
@@ -201,7 +200,6 @@ Sincerely,
                 ) : (
                   <div className="flex items-center justify-center h-full text-muted-foreground">
                     <div className="text-center">
-                      <Sparkles className="h-8 w-8 mx-auto mb-2 opacity-50" />
                       <p>Your generated cover letter will appear here</p>
                     </div>
                   </div>

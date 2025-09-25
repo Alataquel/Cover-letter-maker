@@ -23,12 +23,29 @@ interface FormData {
 export const CoverLetterForm: React.FC<CoverLetterFormProps> = ({ onClose, onSave }) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
-    jobTitle: '',
-    companyName: '',
-    jobDescription: '',
+    jobTitle: 'Senior Software Engineer',
+    companyName: 'TechCorp Solutions',
+    jobDescription: 'We are looking for a Senior Software Engineer to join our dynamic team. The ideal candidate will have 5+ years of experience in React, TypeScript, and modern web development. You will be responsible for building scalable web applications and mentoring junior developers.',
     apiKey: '',
   });
-  const [generatedLetter, setGeneratedLetter] = useState<string>('');
+  const [generatedLetter, setGeneratedLetter] = useState<string>(`Dear Hiring Manager,
+
+I am writing to express my strong interest in the Senior Software Engineer position at TechCorp Solutions. With over 6 years of experience in full-stack development and a proven track record of delivering high-quality web applications, I am excited about the opportunity to contribute to your dynamic team.
+
+In my current role at InnovateTech, I have successfully led the development of several React-based applications, utilizing TypeScript to ensure code reliability and maintainability. My expertise in modern web development frameworks, coupled with my experience in mentoring junior developers, aligns perfectly with the requirements outlined in your job description.
+
+Key highlights of my qualifications include:
+• 6+ years of hands-on experience with React, TypeScript, and Node.js
+• Led a team of 4 developers in building a customer-facing platform that increased user engagement by 40%
+• Implemented CI/CD pipelines that reduced deployment time by 60%
+• Mentored 8 junior developers, with 100% retention rate in the team
+
+I am particularly drawn to TechCorp Solutions' commitment to innovation and technological excellence. Your recent work in developing scalable cloud solutions resonates with my passion for building robust, efficient systems that can handle enterprise-level demands.
+
+I would welcome the opportunity to discuss how my technical expertise and leadership experience can contribute to your team's continued success. Thank you for considering my application.
+
+Sincerely,
+[Your Name]`);
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleInputChange = (field: keyof FormData, value: string) => {
@@ -153,7 +170,7 @@ Please write a compelling, professional cover letter that highlights relevant ex
               <Sparkles className="h-5 w-5 text-primary-foreground" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-card-foreground">Create Cover Letter</h2>
+              <h2 className="text-xl font-semibold text-card-foreground">AI Cover Letter</h2>
               <p className="text-sm text-muted-foreground">AI-powered professional cover letter generation</p>
             </div>
           </div>
